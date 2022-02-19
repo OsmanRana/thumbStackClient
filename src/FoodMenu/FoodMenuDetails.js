@@ -1,6 +1,6 @@
 import React from "react";
 
-const FoodMenuDetails = ({ food }) => {
+const FoodMenuDetails = ({ food, handleOrder }) => {
   const { name, price, image } = food;
 
   return (
@@ -9,7 +9,11 @@ const FoodMenuDetails = ({ food }) => {
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">Price: $ {price}</p>
-        <button type="button" class="btn btn-warning">
+        <button
+          type="button"
+          className="btn btn-warning"
+          onClick={() => handleOrder(food)}
+        >
           Order Now
         </button>
       </div>
