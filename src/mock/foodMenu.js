@@ -17,14 +17,15 @@ const foodMenu = [
     id: 3,
     name: "Hot Dog",
     price: 3.5,
-    image: "",
+    image:
+      "https://images.pexels.com/photos/3023479/pexels-photo-3023479.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   },
   {
     id: 4,
     name: "Chicken Nuggets",
     price: 3.0,
     image:
-      "https://images.pexels.com/photos/3023479/pexels-photo-3023479.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   },
   {
     id: 5,
