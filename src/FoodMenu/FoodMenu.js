@@ -4,9 +4,18 @@ import Orders from "../Orders/Orders";
 import FoodMenuDetails from "./FoodMenuDetails";
 const FoodMenu = () => {
   const [foodOrder, setfoodOrder] = useState([]);
+  const [subtotal, setSubTotal] = useState([]);
+
+  let total = 0;
+  for (let i = 0; i < subtotal.length; i++) {
+    total += subtotal[i];
+  }
+  let tip = total * (0.1).toFixed(2);
+  let grandTotal = total + tip;
 
   const handleOrder = (food) => {
     setfoodOrder(foodOrder.concat(food));
+    setSubTotal(subtotal.concat(food.price));
   };
 
   return (
@@ -15,14 +24,17 @@ const FoodMenu = () => {
         <div className="bg-warning p-3 m-3 text-white text-start">
           <h1>My Orders</h1>
           <p>No of Items: {foodOrder.length} </p>
-          <p>Total:</p>
-          <p>Tip @ 10%: </p>
-          <h3>Total to Pay: </h3>
+          <p>Total: $ {total}</p>
+          <p>Tip @ 10%: $ {tip} </p>
+          <h3>Total to Pay: $ {grandTotal} </h3>
         </div>
         <div className=" p-3 m-3 border-0 shadow-sm d-flex flex-wrap ">
           {foodOrder.length !== 0 &&
-            foodOrder.map((foodItem) => (
-              <Orders key={foodItem.id} foodItem={foodItem}></Orders>
+            foodOrder?.map((foodItem) => (
+              <Orders
+                key={foodOrder.indexOf(foodItem) + Math.random()}
+                foodItem={foodItem}
+              ></Orders>
             ))}
         </div>
         <button
