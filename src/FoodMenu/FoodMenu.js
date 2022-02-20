@@ -12,8 +12,12 @@ const FoodMenu = () => {
   const [newItemId, setNewItemId] = useState("");
   console.log(confirmOrders);
 
+  const handleBill = (id) => {
+    console.log(id)
+  };
+
   useEffect(() => {
-    fetch("http://localhost:5000/orders")
+    fetch("https://blooming-tundra-68684.herokuapp.com/orders")
       .then((res) => res.json())
       .then((data) => setConfirmOrders(data));
   }, []);
@@ -29,11 +33,6 @@ const FoodMenu = () => {
     setfoodOrder(foodOrder.concat(food));
   };
 
-  const handleSubTotal = (item) => {
-    // setSubTotal(subtotal.concat(item));
-    console.log(total);
-  };
-
   const handleRemoveItem = (id) => {
     const newFoodOrder = foodOrder.filter((foodItem) => foodItem.id !== id);
     setfoodOrder(newFoodOrder);
@@ -42,7 +41,7 @@ const FoodMenu = () => {
   const handleRemoveItemFromConfirmOrder = (id) => {
     const proceed = window.confirm("Are you sure to delete the order");
     if (proceed) {
-      fetch(`http://localhost:5000/orders/${id}`, {
+      fetch(`https://blooming-tundra-68684.herokuapp.com/orders/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -59,7 +58,7 @@ const FoodMenu = () => {
   };
 
   const handleConfirmOrder = () => {
-    fetch("http://localhost:5000/addOrder", {
+    fetch("https://blooming-tundra-68684.herokuapp.com/addOrder", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,7 +76,7 @@ const FoodMenu = () => {
   };
 
   const getNewItem = (food) => {
-    fetch(`http://localhost:5000/addItem/${newItemId}`, {
+    fetch(`https://blooming-tundra-68684.herokuapp.com/addItem/${newItemId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -111,6 +110,7 @@ const FoodMenu = () => {
             <p>Total: $ {total}</p>
             <p>Tip @ 10%: $ {tip} </p>
             <h3>Total to Pay: $ {grandTotal} </h3>
+            
           </div>
           <h3>Placed Orders: </h3>
           <div className=" p-3 m-3 border-0 shadow-sm d-flex flex-column flex-wrap ">
@@ -123,7 +123,7 @@ const FoodMenu = () => {
                   handleRemoveItemFromConfirmOrder={
                     handleRemoveItemFromConfirmOrder
                   }
-                  handleSubTotal={handleSubTotal}
+                  handleBill={handleBill}
                 ></ConfirmedOrder>
               ))}
           </div>

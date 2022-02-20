@@ -5,6 +5,7 @@ const ConfirmedOrder = ({
   handleRemoveItemFromConfirmOrder,
   handleAddNewItem,
   handleSubTotal,
+  handleBill
 }) => {
   const { foodOrder } = order;
   return (
@@ -23,13 +24,20 @@ const ConfirmedOrder = ({
                 <div className="card-body">
                   <h5 className="card-title">{foodOrderItem.name}</h5>
                   <p className="card-text">Price: $ {foodOrderItem.price}</p>
-                  {handleSubTotal(foodOrderItem.price)}
+                 
                 </div>
               </div>
             );
           })}
       </div>
 
+      <button
+        type="button"
+        className="btn btn-success fw-bold text-white w-25 my-3"
+        onClick={() => handleBill(order?._id)}
+      >
+        Pay Bill
+      </button>
       <button
         type="button"
         className="btn btn-success fw-bold text-white w-25 my-3"
