@@ -6,14 +6,16 @@ import Orders from "../Orders/Orders";
 import FoodMenuDetails from "./FoodMenuDetails";
 const FoodMenu = () => {
   const [foodOrder, setfoodOrder] = useState([]);
-  const [subtotal, setSubTotal] = useState([]);
   const [confirmOrders, setConfirmOrders] = useState([]);
   const [display, setDisplay] = useState(false);
   const [newItemId, setNewItemId] = useState("");
-  console.log(confirmOrders);
+  const [subtotal, setSubtotal] = useState([]);
+  console.log(subtotal);
 
   const handleBill = (id) => {
-    console.log(id)
+    fetch(`http://localhost:5000/singleOrder/${id}`)
+      .then((res) => res.json())
+      .then((data) => setSubtotal(data.foodOrder));
   };
 
   useEffect(() => {
@@ -24,9 +26,10 @@ const FoodMenu = () => {
 
   let total = 0;
   for (let i = 0; i < subtotal.length; i++) {
-    total += subtotal[i];
+    total += subtotal[i].price;
   }
-  let tip = total * (0.1).toFixed(2);
+  let tip = Number((total * 0.1).toFixed(2));
+
   let grandTotal = total + tip;
 
   const handleOrder = (food) => {
@@ -76,7 +79,7 @@ const FoodMenu = () => {
   };
 
   const getNewItem = (food) => {
-    fetch(`https://blooming-tundra-68684.herokuapp.com/addItem/${newItemId}`, {
+    fetch(`http://localhost:5000/addItem/${newItemId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -106,11 +109,10 @@ const FoodMenu = () => {
         <div className=" p-3 m-3 border-0 shadow ">
           <div className="bg-warning p-3 m-3 text-white text-start">
             <h1>My Orders</h1>
-            <p>No of Items: {foodOrder.length} </p>
+            <p>No of Items: {subtotal.length} </p>
             <p>Total: $ {total}</p>
             <p>Tip @ 10%: $ {tip} </p>
             <h3>Total to Pay: $ {grandTotal} </h3>
-            
           </div>
           <h3>Placed Orders: </h3>
           <div className=" p-3 m-3 border-0 shadow-sm d-flex flex-column flex-wrap ">
