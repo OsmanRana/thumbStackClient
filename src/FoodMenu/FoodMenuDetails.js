@@ -11,7 +11,7 @@ const FoodMenuDetails = ({ food, handleOrder }) => {
         <p className="card-text">Price: $ {price}</p>
         <button
           type="button"
-          className="btn btn-warning"
+          className="btn btn-success fw-bold text-white"
           onClick={() => handleOrder(food)}
         >
           Order Now
