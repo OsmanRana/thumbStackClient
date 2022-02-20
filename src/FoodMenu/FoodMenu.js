@@ -27,7 +27,11 @@ const FoodMenu = () => {
 
   const handleOrder = (food) => {
     setfoodOrder(foodOrder.concat(food));
-    setSubTotal(subtotal.concat(food.price));
+  };
+
+  const handleSubTotal = (item) => {
+    // setSubTotal(subtotal.concat(item));
+    console.log(total);
   };
 
   const handleRemoveItem = (id) => {
@@ -64,10 +68,10 @@ const FoodMenu = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           alert("Your order palced Successfully!");
           setfoodOrder("");
+          window.location.reload();
         }
       });
   };
@@ -81,7 +85,12 @@ const FoodMenu = () => {
       body: JSON.stringify(food),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          alert("Item added successfully");
+          window.location.reload();
+        }
+      });
   };
 
   const handleAddNewItem = (id) => {
@@ -114,6 +123,7 @@ const FoodMenu = () => {
                   handleRemoveItemFromConfirmOrder={
                     handleRemoveItemFromConfirmOrder
                   }
+                  handleSubTotal={handleSubTotal}
                 ></ConfirmedOrder>
               ))}
           </div>

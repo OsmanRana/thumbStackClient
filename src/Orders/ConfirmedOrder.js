@@ -4,6 +4,7 @@ const ConfirmedOrder = ({
   order,
   handleRemoveItemFromConfirmOrder,
   handleAddNewItem,
+  handleSubTotal,
 }) => {
   const { foodOrder } = order;
   return (
@@ -13,7 +14,7 @@ const ConfirmedOrder = ({
           foodOrder?.map((foodOrderItem) => {
             return (
               <div
-                key={foodOrderItem.id}
+                key={foodOrderItem.id*Math.random()}
                 style={{
                   maxWidth: "24rem",
                   textAlign: "left",
@@ -22,11 +23,13 @@ const ConfirmedOrder = ({
                 <div className="card-body">
                   <h5 className="card-title">{foodOrderItem.name}</h5>
                   <p className="card-text">Price: $ {foodOrderItem.price}</p>
+                  {handleSubTotal(foodOrderItem.price)}
                 </div>
               </div>
             );
           })}
       </div>
+
       <button
         type="button"
         className="btn btn-success fw-bold text-white w-25 my-3"
