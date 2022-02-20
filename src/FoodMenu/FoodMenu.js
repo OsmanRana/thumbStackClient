@@ -13,7 +13,7 @@ const FoodMenu = () => {
   console.log(subtotal);
 
   const handleBill = (id) => {
-    fetch(`http://localhost:5000/singleOrder/${id}`)
+    fetch(`https://blooming-tundra-68684.herokuapp.com/singleOrder/${id}`)
       .then((res) => res.json())
       .then((data) => setSubtotal(data.foodOrder));
   };
@@ -79,7 +79,7 @@ const FoodMenu = () => {
   };
 
   const getNewItem = (food) => {
-    fetch(`http://localhost:5000/addItem/${newItemId}`, {
+    fetch(`https://blooming-tundra-68684.herokuapp.com/addItem/${newItemId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
