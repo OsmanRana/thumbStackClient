@@ -4,18 +4,20 @@ import AddNewItem from "../Orders/AddNewItem";
 import ConfirmedOrder from "../Orders/ConfirmedOrder";
 import Orders from "../Orders/Orders";
 import FoodMenuDetails from "./FoodMenuDetails";
+import { jsPDF } from "jspdf";
+
 const FoodMenu = () => {
   const [foodOrder, setfoodOrder] = useState([]);
   const [confirmOrders, setConfirmOrders] = useState([]);
   const [display, setDisplay] = useState(false);
   const [newItemId, setNewItemId] = useState("");
   const [subtotal, setSubtotal] = useState([]);
-  console.log(subtotal);
 
   const handleBill = (id) => {
     fetch(`https://blooming-tundra-68684.herokuapp.com/singleOrder/${id}`)
       .then((res) => res.json())
       .then((data) => setSubtotal(data.foodOrder));
+    alert("Calculating bill");
   };
 
   useEffect(() => {
@@ -31,6 +33,18 @@ const FoodMenu = () => {
   let tip = Number((total * 0.1).toFixed(2));
 
   let grandTotal = total + tip;
+
+  const handlePdfgeneration = () => {
+    const doc = new jsPDF("portrait", "px", "a4", "flase");
+    alert("Generating a PDF bill");
+
+    doc.text("Ozy Restaurant", 60, 60);
+    doc.text(`Number of Items: ${subtotal.length}`, 60, 80);
+    doc.text(`Sub-Total: $ ${total}`, 60, 100);
+    doc.text(`Tip @ 10%: $ ${tip}`, 60, 120);
+    doc.text(`Total to pay: $ ${grandTotal}`, 60, 140);
+    doc.save("Bill.pdf");
+  };
 
   const handleOrder = (food) => {
     setfoodOrder(foodOrder.concat(food));
@@ -113,6 +127,12 @@ const FoodMenu = () => {
             <p>Total: $ {total}</p>
             <p>Tip @ 10%: $ {tip} </p>
             <h3>Total to Pay: $ {grandTotal} </h3>
+            <button
+              className="btn btn-light fw-bold w-25 my-3"
+              onClick={() => handlePdfgeneration()}
+            >
+              Generate PDF Bill
+            </button>
           </div>
           <h3>Placed Orders: </h3>
           <div className=" p-3 m-3 border-0 shadow-sm d-flex flex-column flex-wrap ">
