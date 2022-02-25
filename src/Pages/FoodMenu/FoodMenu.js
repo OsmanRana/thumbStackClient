@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import foodMenu from "../mock/foodMenu";
+import foodMenu from '../../mock/foodMenu'
 import AddNewItem from "../Orders/AddNewItem";
 import ConfirmedOrder from "../Orders/ConfirmedOrder";
 import Orders from "../Orders/Orders";

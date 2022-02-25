@@ -1,9 +1,11 @@
 import "./App.css";
-import FoodMenu from "./FoodMenu/FoodMenu";
+import FoodMenu from "./Pages/FoodMenu/FoodMenu";
+import HomePage from "./Pages/HomePage/HomePage";
 
 function App() {
   return (
     <div className="App">
+      <HomePage />
       <FoodMenu></FoodMenu>
     </div>
   );
